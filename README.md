@@ -92,8 +92,15 @@ In this exercise you will:
 
 #### Reflection Questions
 
-1. **What steps are required to open an X11 window and receive events?**
-2. **How does the `Expose` event trigger your drawing code?**
+1. **What steps are required to open an X11 window and receive events?** *To open a Window with x11 few steps are nescessary. First we need to open a connection to the xserver. This is done by creating a Pointer of the type "Display" and Setting it to the worth of the function XOpenDisplay(NULL) NULL is no value, which stands for standard display. Or in other words, the pointer of dpy points at our Display. Next if section is that if the connction to our display somehow doesn't work that we get an Errormessage, and close our Programm. int screen gets the number of our default screen, which often is 0. In the next step we are actually creating our window called win withe Window type of the x11 librarie.
+   XCreateSimpleWindow(
+           dpy, RootWindow(dpy, screen),
+           10, 10, 400, 300, 1,
+           BlackPixel(dpy, screen),
+           WhitePixel(dpy, screen)
+   This function does create our window and it has many parameters. As you remember dpy is our Pointer to our display (where we want to opem our window. RootWindow(dpy, screen) Is the parent window of our default display (0), this also needed so that the window gets created at the right path. These numbers: 10, 10, 400, 300, 1, have a simple origin: x_pos,y_pos, X_length, y_length, frame_width. The next function does tell our Xserver which events are used  XSelectInput(dpy, win, ExposureMask | KeyPressMask); In our case we want to use the even ExposureMask(true if the window has to get "redrawn") and KeyPressmark(true if a Key is pressed) inside our window win on the default display dpy.  This function maps our Window (win) to the display: XMapWindow(dpy, win);.Final step is done with our endless for loop, it's usedto react immidiatly on our events. I guess that these are the steps nescessary to open a window and receive events.*
+
+3. **How does the `Expose` event trigger your drawing code?** *The expose trigger is true, if our window has to get redrawn, for example sometimes if we move it in size or to another position (or in any case if we map it) our window has to get redrawn. Then our rectangle gets redrawn. This is nescessary, because if we redraw the window, we also want to have the rectangle on it.*
 
 ---
 
