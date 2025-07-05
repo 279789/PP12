@@ -1,6 +1,6 @@
 # PP12: GUI Programming with X11 and GTK+
 
-## Goal
+##  Goal
 
 In this exercise you will:
 
