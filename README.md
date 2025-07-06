@@ -159,8 +159,8 @@ In this exercise you will:
 
 #### Reflection Questions
 
-1. **How does GTK’s signal-and-callback mechanism differ from X11’s event loop?**
-2. **Why use `pkg-config` when compiling GTK applications?**
+1. **How does GTK’s signal-and-callback mechanism differ from X11’s event loop?** *In GTK we work with several functions that do the work for us. For example, if we want to know that our button is pressed, we use the function: g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), textfield);, which does nothing else than calling our "on_button_clicked" function, which we than use to make the events happen that we want(after the button was pressed. X11s event loop is a very different concept first we have to define our XServer Input that we want to use, than we need to write a endless for loop, which is constantly observing inputchanges, if something changes we use an simple if condition do the wanted reaction*
+2. **Why use `pkg-config` when compiling GTK applications?** *This is necessary so that our linker is able to find the libraries, because the gtk libraries are not on the default path. This also ensures that the right linker flags are set.*
 
 ---
 
